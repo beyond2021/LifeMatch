@@ -13,13 +13,20 @@ class HomeController: UIViewController {
      let cardDeckView = UIView()
      let buttonsStackView = HomeBottomControlsStackView() //
     
-    //MVC
-//    let users = [User(name: "kelly", age: 18, profession: "Teacher", bloodType: "A-", imageName: "lady5cMatch"), User(name: "Jane", age: 23, profession: "Stripper", bloodType: "O", imageName: "lady4c")]
-
-    //MVVM - to support mulitple different looking cards
-    let cardViewModels = [
-        User(name: "kelly", age: 18, profession: "Teacher", bloodType: "A-", imageName: "lady5cMatch").toCardViewModel(), User(name: "Jane", age: 23, profession: "Stripper", bloodType: "O", imageName: "lady4c").toCardViewModel()// from USER
-    ]
+    
+    // refactor
+    let cardViewModels: [CardViewModel] = {
+        let producers = [User(name: "kelly", age: 18, profession: "Teacher", bloodType: "A-", imageName: "lady5cMatch"),
+                         Advertiser(title: "Slide Out Menu", brandName: "Beyond2021", posterPhotoName: "slide_out_menu_poster"),
+                         User(name: "Jane", age: 23, profession: "Stripper", bloodType: "O", imageName: "lady4c"),User(name: "kelly", age: 18, profession: "Teacher", bloodType: "A-", imageName: "lady5cMatch"),
+                         Advertiser(title: "Slide Out Menu", brandName: "Beyond2021", posterPhotoName: "slide_out_menu_poster"),
+                         User(name: "Jane", age: 23, profession: "Stripper", bloodType: "O", imageName: "lady4c")] as [ProducesCardViewModel]
+        
+        let viewModels = producers.map({return $0.toCardViewModel()})
+        return viewModels
+        
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,11 +82,10 @@ class HomeController: UIViewController {
  */
     //MVVM
     fileprivate func setupDummyCards(){
+        //use forEach loop instaed of cellForRow
         cardViewModels.forEach { (viewModel) in
             let cardView = CardView(frame: .zero)
-            cardView.imageView.image = UIImage(named: viewModel.imageName) // plug in any image
-            cardView.informationLabel.attributedText = viewModel.attributedString // plug your string here.
-            cardView.informationLabel.textAlignment = viewModel.textAlignment
+            cardView.cardViewModel = viewModel // set in CardView
             cardDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }

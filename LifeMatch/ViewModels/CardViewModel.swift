@@ -7,6 +7,10 @@
 //
 
 import UIKit
+// PROTOCOL ORIENTED PROGRAMMING
+protocol ProducesCardViewModel {
+    func toCardViewModel() -> CardViewModel
+}
 
 struct CardViewModel {
     let imageName: String

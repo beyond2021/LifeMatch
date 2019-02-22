@@ -18,6 +18,7 @@
 		2257EC462208BEAB009D598D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2257EC452208BEAB009D598D /* CardView.swift */; };
 		229959862218FD0C00D1E682 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229959852218FD0C00D1E682 /* User.swift */; };
 		22A71059221A272B00E87396 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A71058221A272B00E87396 /* CardViewModel.swift */; };
+		22A7105B221A8CCC00E87396 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A7105A221A8CCC00E87396 /* Advertiser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		2257EC452208BEAB009D598D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		229959852218FD0C00D1E682 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		22A71058221A272B00E87396 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		22A7105A221A8CCC00E87396 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				229959852218FD0C00D1E682 /* User.swift */,
+				22A7105A221A8CCC00E87396 /* Advertiser.swift */,
 			);
 			name = Model;
 			path = "New Group2";
@@ -198,6 +201,7 @@
 			files = (
 				2257EC2E22049430009D598D /* ViewController.swift in Sources */,
 				2257EC4222064811009D598D /* HomeBottomControlsStackView.swift in Sources */,
+				22A7105B221A8CCC00E87396 /* Advertiser.swift in Sources */,
 				2257EC2C22049430009D598D /* AppDelegate.swift in Sources */,
 				2257EC442207476A009D598D /* TopNavigationStackView.swift in Sources */,
 				22A71059221A272B00E87396 /* CardViewModel.swift in Sources */,

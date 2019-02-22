@@ -9,24 +9,31 @@
 import UIKit
 
 class CardView: UIView {
-    //Configurations
+    // Setter
+    // set the cardView model here instead of in the vc
+    var cardViewModel: CardViewModel! {
+        didSet {
+            imageView.image = UIImage(named: cardViewModel.imageName)
+            informationLabel.attributedText = cardViewModel.attributedString // plug your string here.
+            informationLabel.textAlignment = cardViewModel.textAlignment
+            
+        }
+    }
+    
+    
+    //Configurations // filePrivate security level of encapsulation
     fileprivate let threshold: CGFloat = 80
-    let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5cMatch"))
-    let informationLabel = UILabel()
+    
+    // Properties
+    fileprivate let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5cMatch"))
+    fileprivate let gradientLayer = CAGradientLayer()
+    fileprivate let informationLabel = UILabel()
 
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.cornerRadius = 10
-        clipsToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        addSubview(imageView)
-        imageView.fillSuperview()
-        addSubview(informationLabel)
-        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
-        informationLabel.text = "TEST NAME TEST AGE TEST BLOODTYPE"
-        informationLabel.textColor = .white
-        informationLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
-        informationLabel.numberOfLines = 0
+        setupLayout()
         
         //card Animation
         // 1:
@@ -38,11 +45,51 @@ class CardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    fileprivate func setupLayout() {
+        layer.cornerRadius = 10
+        clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        addSubview(imageView)
+        imageView.fillSuperview()
+        // add a gradient layer
+        setupGradientLayer()
+        
+        addSubview(informationLabel)
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
+        informationLabel.textColor = .white
+        informationLabel.numberOfLines = 0
+    }
+    
+    //MARK: Layout
     
     
-    @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer){
+    
+    fileprivate func setupGradientLayer() {
+        //How we can draw a gradient with swift.
+        //1: access the layer in the view - view,s coreAnimation Layer - for drawing
+       
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.5, 1.1]
+        // self.frame is .zero - remember initializer
+//        gradientLayer.frame = CGRect(x: 0, y: 0, width: 300, height: 400)
+        layer.addSublayer(gradientLayer)
+    }
+    // to get the frame - happens everytime our view draws itself
+    override func layoutSubviews() {
+        // in here you will know what your frame will be.
+        gradientLayer.frame = self.frame
+    }
+    
+    //MARK: Touches
+    
+    @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer){ 
 
         switch gesture.state {
+        case .began:
+            // remove aninimations to stop unpredictablity here.
+            superview?.subviews.forEach({ (subView) in
+                subView.layer.removeAllAnimations()
+            })
         case .changed:
             handleChanged(gesture)
         case .ended:

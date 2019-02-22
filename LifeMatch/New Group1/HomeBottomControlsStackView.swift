@@ -15,6 +15,7 @@ class HomeBottomControlsStackView: UIStackView {
         distribution = .fillEqually
         heightAnchor.constraint(equalToConstant: 100).isActive = true
 //        let button = UIButton(type: .system)
+        //use map to create one type from another for all members of an array
         let yellowSubViews = [#imageLiteral(resourceName: "refresh_circle"), #imageLiteral(resourceName: "dismiss_circle"), #imageLiteral(resourceName: "super_like_circle"), #imageLiteral(resourceName: "like_circle"), #imageLiteral(resourceName: "boost_circle")].map { (image) -> UIButton in
             let b = UIButton(type: .system)
             b.setImage(image, for: .normal)
